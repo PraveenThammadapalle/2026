@@ -1,0 +1,32 @@
+Write a C program for Fibonacci Series
+#######################################################################
+#include <stdio.h>
+
+void fibonacci(int n)
+{
+    int a = 0;
+    int b = 1;
+    int c;
+    int i;
+
+    for (i = 0; i < n; i++)
+    {
+        printf("%d ", a);
+
+        c = a + b;
+        a = b;
+        b = c;
+    }
+}
+
+int main(void)
+{
+    int n;
+
+    printf("Enter number of terms: ");
+    scanf("%d", &n);
+
+    fibonacci(n);
+
+    return 0;
+}
