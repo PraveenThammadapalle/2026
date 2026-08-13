@@ -1,0 +1,78 @@
+//Write a C program to search for an element in a sorted array using Binary Search.
+
+
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+int binary_search(int arr[], int n, int key)
+{
+    int low = 0;
+    int high = n - 1;
+    int mid;
+
+    while (low <= high)
+    {
+        mid = low + (high - low) / 2;
+
+        if (arr[mid] == key)
+        {
+            return mid;
+        }
+        else if (arr[mid] < key)
+        {
+            low = mid + 1;
+        }
+        else
+        {
+            high = mid - 1;
+        }
+    }
+
+    return -1;
+}
+
+int main(void)
+{
+    int arr[MAX_SIZE], n,i, key, result;
+
+    printf("Enter array size: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > MAX_SIZE)
+    {
+        printf("Invalid array size\n");
+        return 1;
+    }
+
+    printf("Enter %d elements in ascending order:\n", n);
+
+    for (i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Enter element to search: ");
+    scanf("%d", &key);
+
+    result = binary_search(arr, n, key);
+
+    if (result != -1)
+    {
+        printf("Element found at index %d\n", result);
+    }
+    else
+    {
+        printf("Element not found\n");
+    }
+
+    return 0;
+}
+Enter array size: 7
+Enter 7 elements in ascending order:
+10 20 30 40 50 60 70
+
+Enter element to search: 50
+
+Element found at index 4
+//#######################
