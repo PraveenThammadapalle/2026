@@ -64,3 +64,28 @@ Enter 5 elements:
 
 Reversed array:
 50 40 30 20 10
+#################################################################
+Q: Can you reverse the array without using another array?
+
+Yes. The above solution uses only one temporary variable, so:
+Time  : O(n)
+Space : O(1)
+
+Q: Can you do this using pointers instead of arr[i]?
+Yes:
+void reverse_array(int *arr, int n)
+{
+    int *start = arr;
+    int *end = arr + n - 1;
+    int temp;
+
+    while (start < end)
+    {
+        temp = *start;
+        *start = *end;
+        *end = temp;
+
+        start++;
+        end--;
+    }
+}
