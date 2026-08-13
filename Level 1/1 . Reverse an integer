@@ -18,3 +18,41 @@ int main(void)
 }
 
 Output: Reverse = 54321
+
+Q1. Why did you use % 10?
+
+Answer:
+
+% 10 gives the last decimal digit of an integer.
+
+Q2. Why did you use / 10?
+
+Answer:
+
+Integer division by 10 removes the last decimal digit.
+
+Q3. Why is rev = rev * 10 + rem used?
+
+Answer:
+
+Multiplying the current reversed number by 10 shifts its digits left by one position, and adding rem appends the newly extracted digit.
+
+This is a very good interview explanation.
+
+Q4. What happens for 1200?
+1200 → 21
+
+Because leading zeros in the reversed integer are not represented.
+
+Q5. What happens for 0?
+
+The loop doesn't execute and:
+
+Reverse = 0
+Q6. What about negative numbers?
+
+That's an excellent follow-up.
+
+For example:
+
+-123 → -321
