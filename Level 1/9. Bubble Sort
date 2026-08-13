@@ -1,0 +1,72 @@
+//Write a C program to sort an array in ascending order/Descending order, using a function. Take the array size and elements from the user.
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void sort_array(int arr[], int n)
+{
+    int i;
+    int j;
+    int temp;
+
+    for (i = 0; i < n - 1; i++)
+    {
+        for (j = 0; j < n - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])  //Ascending order
+            //if (arr[j] > arr[j + 1])  //Descending order
+            {
+                temp = arr[j];
+
+                arr[j] = arr[j + 1];
+
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main(void)
+{
+    int arr[MAX_SIZE];
+    int n;
+    int i;
+
+    printf("Enter array size: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > MAX_SIZE)
+    {
+        printf("Invalid array size\n");
+        return 1;
+    }
+
+    printf("Enter %d elements:\n", n);
+
+    for (i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+
+    sort_array(arr, n);
+
+    printf("Sorted array:\n");
+
+    for (i = 0; i < n; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+
+    printf("\n");
+
+    return 0;
+}
+
+##########################################
+Then repeat for the remaining elements.
+
+for (i = 0; i < n - 1; i++)
+{
+    for (j = 0; j < n - i - 1; j++)
+
+This is Bubble Sort.
