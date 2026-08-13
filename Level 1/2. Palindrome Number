@@ -1,0 +1,112 @@
+Write a C program to check whether a given integer is a palindrome or not.
+#####################################################################################
+#include <stdio.h>
+
+int main(void)
+{
+    int num = 121;
+    int original;
+    int reverse = 0;
+    int remainder;
+
+    original = num;
+
+    while (num != 0)
+    {
+        remainder = num % 10;
+
+        reverse = reverse * 10 + remainder;
+
+        num = num / 10;
+    }
+    if (original == reverse)
+    {
+        printf("Palindrome\n");
+    }
+    else
+    {
+        printf("Not Palindrome\n");
+    }
+    return 0;
+}
+
+Output: Palindrome
+#########################################################################
+Funtion Version:
+
+#include <stdio.h>
+
+int is_palindrome(int num)
+{
+    int original = num;
+    int reverse = 0;
+    int remainder;
+
+    while (num != 0)
+    {
+        remainder = num % 10;
+        reverse = reverse * 10 + remainder;
+        num = num / 10;
+    }
+
+    return (original == reverse);
+}
+
+int main(void)
+{
+    int num = 1221;
+
+    if (is_palindrome(num))
+        printf("Palindrome\n");
+    else
+        printf("Not Palindrome\n");
+
+    return 0;
+}
+###################################################################################
+Q1. What is the difference between % and / here?
+
+Answer:
+
+% 10 extracts the last digit, while / 10 removes the last digit.
+
+Q2. Why is reverse initialized to zero?
+
+Because we are building the reversed number from the beginning:
+
+reverse = 0
+
+Then:
+
+0 → 1 → 12 → 121
+Q3. What happens for 123?
+Original = 123
+Reverse  = 321
+
+Therefore:
+
+Not Palindrome
+Q4. What happens for 0?
+
+0 is generally considered a palindrome.
+
+The function above returns:
+
+true
+
+because:
+
+original = 0
+reverse = 0
+Q5. What about negative numbers?
+
+This is a good interviewer follow-up.
+
+You should clarify the requirement.
+
+For a simple implementation, you can reject negative values:
+
+if (num < 0)
+    return 0;
+
+because -121 is not normally treated as a decimal palindrome in basic interview problems.
