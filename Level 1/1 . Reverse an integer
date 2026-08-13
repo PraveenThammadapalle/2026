@@ -1,0 +1,20 @@
+"Write a C program to reverse an integer without using a string."
+
+#include <stdio.h>
+int main(void)
+{
+    int num = 12345;
+    int rev = 0;
+    int rem;
+
+    while (num != 0)
+    {
+        rem = num % 10;
+        rev = rev * 10 + rem;
+        num = num / 10;
+    }
+    printf("Reverse = %d\n", rev);
+    return 0;
+}
+
+Output: Reverse = 54321
