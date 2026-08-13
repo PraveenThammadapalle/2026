@@ -1,0 +1,104 @@
+1. Using Temporary Variable — Most Common
+#############################################
+#include <stdio.h>
+
+void swap(int *a, int *b)
+{
+    int temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
+}
+int main(void)
+{
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("Before swap: a = %d, b = %d\n", a, b);
+    swap(&a, &b);
+    printf("After swap:  a = %d, b = %d\n", a, b);
+    return 0;
+}
+
+Enter two numbers: 10 20
+Before swap: a = 10, b = 20
+After swap:  a = 20, b = 10
+##########################################################
+2. Without Temporary Variable — Addition/Subtraction
+
+#include <stdio.h>
+
+void swap(int *a, int *b)
+{
+    *a = *a + *b;
+    *b = *a - *b;
+    *a = *a - *b;
+}
+
+int main(void)
+{
+    int a, b;
+
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+
+    swap(&a, &b);
+
+    printf("After swap: a = %d, b = %d\n", a, b);
+
+    return 0;
+}
+##########################################################
+3. Without Temporary Variable — XOR
+
+#include <stdio.h>
+
+void swap(int *a, int *b)
+{
+    *a = *a ^ *b;
+    *b = *a ^ *b;
+    *a = *a ^ *b;
+}
+
+int main(void)
+{
+    int a, b;
+
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+
+    swap(&a, &b);
+
+    printf("After swap: a = %d, b = %d\n", a, b);
+
+    return 0;
+}
+#######################################################
+4. Using Pointer Variables Inside Function
+
+#include <stdio.h>
+
+void swap(int *a, int *b)
+{
+    int *temp;
+
+    temp = a;
+
+    a = b;
+    b = temp;
+}
+
+int main(void)
+{
+    int a, b;
+
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+
+    swap(&a, &b);
+
+    printf("a = %d, b = %d\n", a, b);
+
+    return 0;
+}
+######################################
