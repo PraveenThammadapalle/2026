@@ -1,5 +1,5 @@
 "Write a C program to reverse an integer without using a string."
-
+###########################################################################################
 #include <stdio.h>
 int main(void)
 {
@@ -18,7 +18,36 @@ int main(void)
 }
 
 Output: Reverse = 54321
+###############################################################################################################
+In FUntin model:
+#include <stdio.h>
 
+int reverse_number(int num)
+{
+    int rev = 0;
+    int rem;
+
+    while (num != 0)
+    {
+        rem = num % 10;
+        rev = rev * 10 + rem;
+        num = num / 10;
+    }
+
+    return rev;
+}
+
+int main(void)
+{
+    int result;
+
+    result = reverse_number(12345);
+
+    printf("%d\n", result);
+
+    return 0;
+}
+########################################################################################################
 Q1. Why did you use % 10?
 
 Answer:
