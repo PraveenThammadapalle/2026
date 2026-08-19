@@ -1,0 +1,77 @@
+//Write a C program to reverse a string without using strrev().
+
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void reverse_string(char str[])
+{
+    int start = 0;
+    int end = 0;
+    char temp;
+
+    /* Find string length */
+    while (str[end] != '\0')
+    {
+        end++;
+    }
+
+    end--;
+
+    /* Reverse string */
+    while (start < end)
+    {
+        temp = str[start];
+
+        str[start] = str[end];
+
+        str[end] = temp;
+
+        start++;
+        end--;
+    }
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    reverse_string(str);
+
+    printf("Reversed string: %s\n", str);
+
+    return 0;
+}
+##########################
+Output:
+Enter a string: Embedded
+
+Reversed string: deddebmE
+#############################################################
+Pointer Version:
+void reverse_string(char *str)
+{
+    char *start = str;
+    char *end = str;
+    char temp;
+
+    while (*end != '\0')
+    {
+        end++;
+    }
+
+    end--;
+
+    while (start < end)
+    {
+        temp = *start;
+        *start = *end;
+        *end = temp;
+
+        start++;
+        end--;
+    }
+}
