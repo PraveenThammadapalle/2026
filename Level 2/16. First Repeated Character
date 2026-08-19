@@ -1,0 +1,47 @@
+//First Repeated Character
+
+#include <stdio.h>
+
+#define MAX_SIZE 100
+#define ASCII_SIZE 256
+
+char first_repeated(const char *str)
+{
+    int frequency[ASCII_SIZE] = {0};
+
+    while (*str != '\0')
+    {
+        if (frequency[(unsigned char)*str] != 0)
+        {
+            return *str;
+        }
+
+        frequency[(unsigned char)*str]++;
+
+        str++;
+    }
+
+    return '\0';
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+    char result;
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    result = first_repeated(str);
+
+    if (result != '\0')
+    {
+        printf("First repeated character = %c\n", result);
+    }
+    else
+    {
+        printf("No repeated character found\n");
+    }
+
+    return 0;
+}
