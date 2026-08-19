@@ -1,0 +1,87 @@
+//Write a C program to count how many times a given character occurs in a string.
+//Array Version
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+int count_character(char str[], char key)
+{
+    int count = 0;
+    int i = 0;
+
+    while (str[i] != '\0')
+    {
+        if (str[i] == key)
+        {
+            count++;
+        }
+
+        i++;
+    }
+
+    return count;
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+    char key;
+    int count;
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    getchar();
+
+    printf("Enter character to search: ");
+    scanf("%c", &key);
+
+    count = count_character(str, key);
+
+    printf("'%c' occurs %d times\n", key, count);
+
+    return 0;
+}
+######################################################
+//Pointer Version
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+int count_character(const char *str, char key)
+{
+    int count = 0;
+
+    while (*str != '\0')
+    {
+        if (*str == key)
+        {
+            count++;
+        }
+
+        str++;
+    }
+
+    return count;
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+    char key;
+    int count;
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    getchar();
+
+    printf("Enter character to search: ");
+    scanf("%c", &key);
+
+    count = count_character(str, key);
+
+    printf("'%c' occurs %d times\n", key, count);
+
+    return 0;
+}
