@@ -1,0 +1,66 @@
+//Write a C program to convert all uppercase characters in a string to lowercase without using strlwr().
+
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void to_lowercase(char str[])
+{
+    int i = 0;
+
+    while (str[i] != '\0')
+    {
+        if (str[i] >= 'A' && str[i] <= 'Z')
+        {
+            str[i] = str[i] - 'A' + 'a';
+        }
+
+        i++;
+    }
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    to_lowercase(str);
+
+    printf("Lowercase: %s\n", str);
+
+    return 0;
+}
+
+#############################################################################
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void to_lowercase(char *str)
+{
+    while (*str != '\0')
+    {
+        if (*str >= 'A' && *str <= 'Z')
+        {
+            *str = *str - 'A' + 'a';
+        }
+
+        str++;
+    }
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    to_lowercase(str);
+
+    printf("Lowercase: %s\n", str);
+
+    return 0;
+}
