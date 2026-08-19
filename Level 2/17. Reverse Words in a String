@@ -1,0 +1,151 @@
+//Write a C program to reverse the order of words in a string.
+
+//Array Version
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void reverse_words(char str[])
+{
+    int start;
+    int end;
+    int i;
+
+    /* Find end of string */
+    for (i = 0; str[i] != '\0'; i++)
+    {
+    }
+
+    end = i - 1;
+
+    /* Remove trailing spaces */
+    while (end >= 0 && str[end] == ' ')
+    {
+        end--;
+    }
+
+    while (end >= 0)
+    {
+        /* Find beginning of current word */
+        i = end;
+
+        while (i >= 0 && str[i] != ' ')
+        {
+            i--;
+        }
+
+        start = i + 1;
+
+        /* Print current word */
+        while (start <= end)
+        {
+            putchar(str[start]);
+            start++;
+        }
+
+        if (i > 0)
+        {
+            putchar(' ');
+        }
+
+        end = i - 1;
+
+        /* Skip extra spaces */
+        while (end >= 0 && str[end] == ' ')
+        {
+            end--;
+        }
+    }
+
+    putchar('\n');
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    printf("Reversed words: ");
+
+    reverse_words(str);
+
+    return 0;
+}
+
+//Pointer Version
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void reverse_words(const char *str)
+{
+    const char *end;
+    const char *start;
+
+    end = str;
+
+    /* Find end of string */
+    while (*end != '\0')
+    {
+        end++;
+    }
+
+    end--;
+
+    /* Remove trailing spaces */
+    while (end >= str && *end == ' ')
+    {
+        end--;
+    }
+
+    while (end >= str)
+    {
+        start = end;
+
+        /* Find beginning of word */
+        while (start >= str && *start != ' ')
+        {
+            start--;
+        }
+
+        start++;
+
+        /* Print word */
+        while (start <= end)
+        {
+            putchar(*start);
+            start++;
+        }
+
+        if (start - 1 > str)
+        {
+            putchar(' ');
+        }
+
+        end = start - 2;
+
+        /* Skip extra spaces */
+        while (end >= str && *end == ' ')
+        {
+            end--;
+        }
+    }
+
+    putchar('\n');
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    printf("Reversed words: ");
+
+    reverse_words(str);
+
+    return 0;
+}
