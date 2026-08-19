@@ -1,0 +1,128 @@
+//Write a C program to remove duplicate characters from a string.
+// Array version
+
+#include <stdio.h>
+
+#define MAX_SIZE 100
+#define ASCII_SIZE 256
+
+int are_anagrams(char str1[], char str2[])
+{
+    int frequency[ASCII_SIZE] = {0};
+    int i;
+
+    /* Count characters in first string */
+    for (i = 0; str1[i] != '\0'; i++)
+    {
+        frequency[(unsigned char)str1[i]]++;
+    }
+
+    /* Remove characters using second string */
+    for (i = 0; str2[i] != '\0'; i++)
+    {
+        frequency[(unsigned char)str2[i]]--;
+    }
+
+    /* Check frequency */
+    for (i = 0; i < ASCII_SIZE; i++)
+    {
+        if (frequency[i] != 0)
+        {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+int main(void)
+{
+    char str1[MAX_SIZE];
+    char str2[MAX_SIZE];
+
+    printf("Enter first string: ");
+    scanf("%99[^\n]", str1);
+
+    getchar();
+
+    printf("Enter second string: ");
+    scanf("%99[^\n]", str2);
+
+    if (are_anagrams(str1, str2))
+    {
+        printf("Strings are Anagrams\n");
+    }
+    else
+    {
+        printf("Strings are Not Anagrams\n");
+    }
+
+    return 0;
+}
+
+##################################################
+//Pointer version
+#include <stdio.h>
+
+#define MAX_SIZE 100
+#define ASCII_SIZE 256
+
+int are_anagrams(const char *str1, const char *str2)
+{
+    int frequency[ASCII_SIZE] = {0};
+    const char *ptr;
+
+    /* Count first string */
+    ptr = str1;
+
+    while (*ptr != '\0')
+    {
+        frequency[(unsigned char)*ptr]++;
+        ptr++;
+    }
+
+    /* Subtract second string */
+    ptr = str2;
+
+    while (*ptr != '\0')
+    {
+        frequency[(unsigned char)*ptr]--;
+        ptr++;
+    }
+
+    /* Check frequency */
+    for (int i = 0; i < ASCII_SIZE; i++)
+    {
+        if (frequency[i] != 0)
+        {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+int main(void)
+{
+    char str1[MAX_SIZE];
+    char str2[MAX_SIZE];
+
+    printf("Enter first string: ");
+    scanf("%99[^\n]", str1);
+
+    getchar();
+
+    printf("Enter second string: ");
+    scanf("%99[^\n]", str2);
+
+    if (are_anagrams(str1, str2))
+    {
+        printf("Strings are Anagrams\n");
+    }
+    else
+    {
+        printf("Strings are Not Anagrams\n");
+    }
+
+    return 0;
+}
