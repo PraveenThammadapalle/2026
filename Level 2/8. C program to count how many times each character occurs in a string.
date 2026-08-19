@@ -1,0 +1,39 @@
+//Write a C program to count how many times each character occurs in a string.
+
+#include <stdio.h>
+
+#define MAX_SIZE 100
+#define ASCII_SIZE 256
+
+void count_frequency(char str[])
+{
+    int frequency[ASCII_SIZE] = {0};
+    int i;
+
+    /* Count each character */
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        frequency[(unsigned char)str[i]]++;
+    }
+
+    /* Display frequency */
+    for (i = 0; i < ASCII_SIZE; i++)
+    {
+        if (frequency[i] != 0)
+        {
+            printf("%c = %d\n", i, frequency[i]);
+        }
+    }
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    count_frequency(str);
+
+    return 0;
+}
