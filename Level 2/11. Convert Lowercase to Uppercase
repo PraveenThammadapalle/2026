@@ -1,0 +1,35 @@
+//Write a C program to convert all lowercase characters in a string to uppercase without using strupr().
+
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void to_uppercase(char str[])
+{
+    int i = 0;
+
+    while (str[i] != '\0')
+    {
+        if (str[i] >= 'a' && str[i] <= 'z')
+        {
+            str[i] = str[i] - 'a' + 'A';
+        }
+
+        i++;
+    }
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    to_uppercase(str);
+
+    printf("Uppercase: %s\n", str);
+
+    return 0;
+}
+
