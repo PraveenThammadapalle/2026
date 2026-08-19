@@ -58,3 +58,60 @@ First non-repeated character = d
 Why do we need two loops?
 
 Because we first need to know how many times each character occurs. Only after that can we determine which character is the first non-repeated one.
+##############################################################################################
+#include <stdio.h>
+
+#define MAX_SIZE 100
+#define ASCII_SIZE 256
+
+char first_non_repeated(const char *str)
+{
+    int frequency[ASCII_SIZE] = {0};
+    const char *ptr;
+
+    /* Count frequency of each character */
+    ptr = str;
+
+    while (*ptr != '\0')
+    {
+        frequency[(unsigned char)*ptr]++;
+        ptr++;
+    }
+
+    /* Find first non-repeated character */
+    ptr = str;
+
+    while (*ptr != '\0')
+    {
+        if (frequency[(unsigned char)*ptr] == 1)
+        {
+            return *ptr;
+        }
+
+        ptr++;
+    }
+
+    return '\0';
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+    char result;
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    result = first_non_repeated(str);
+
+    if (result != '\0')
+    {
+        printf("First non-repeated character = %c\n", result);
+    }
+    else
+    {
+        printf("No non-repeated character found\n");
+    }
+
+    return 0;
+}
