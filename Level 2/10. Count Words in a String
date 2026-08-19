@@ -47,7 +47,54 @@ int main(void)
 
     return 0;
 }
+############################################################################
+Pointer Version
+#include <stdio.h>
 
+#define MAX_SIZE 100
+
+int count_words(const char *str)
+{
+    int count = 0;
+    int in_word = 0;
+
+    while (*str != '\0')
+    {
+        if ((*str != ' ') &&
+            (*str != '\t') &&
+            (*str != '\n'))
+        {
+            if (in_word == 0)
+            {
+                count++;
+                in_word = 1;
+            }
+        }
+        else
+        {
+            in_word = 0;
+        }
+
+        str++;
+    }
+
+    return count;
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+    int words;
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    words = count_words(str);
+
+    printf("Number of words = %d\n", words);
+
+    return 0;
+}
 
 
 ################################
