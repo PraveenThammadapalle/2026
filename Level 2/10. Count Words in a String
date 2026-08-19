@@ -1,0 +1,57 @@
+//Write a C program to count the number of words in a string using a function.
+
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+int count_words(char str[])
+{
+    int i = 0;
+    int count = 0;
+    int in_word = 0;
+
+    while (str[i] != '\0')
+    {
+        if (str[i] != ' ' &&
+            str[i] != '\t' &&
+            str[i] != '\n')
+        {
+            if (in_word == 0)
+            {
+                count++;
+                in_word = 1;
+            }
+        }
+        else
+        {
+            in_word = 0;
+        }
+
+        i++;
+    }
+
+    return count;
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+    int words;
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    words = count_words(str);
+
+    printf("Number of words = %d\n", words);
+
+    return 0;
+}
+
+
+
+################################
+Output
+Enter a string: Embedded C Programming
+
+Number of words = 3
