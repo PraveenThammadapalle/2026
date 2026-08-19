@@ -1,0 +1,44 @@
+//C program to remove duplicate characters from a string
+
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void remove_duplicates(char str[])
+{
+    int i;
+    int j;
+    int k;
+
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        for (j = i + 1; str[j] != '\0'; j++)
+        {
+            if (str[i] == str[j])
+            {
+                /* Shift characters left */
+                for (k = j; str[k] != '\0'; k++)
+                {
+                    str[k] = str[k + 1];
+                }
+
+                j--;
+            }
+        }
+    }
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    remove_duplicates(str);
+
+    printf("After removing duplicates: %s\n", str);
+
+    return 0;
+}
+
