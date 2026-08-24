@@ -1,0 +1,29 @@
+//Write a C program to demonstrate a pointer to pointer and modify the value of a variable using a double pointer.
+
+#include <stdio.h>
+
+void modify_value(int **ptr)
+{
+    **ptr = 100;
+}
+
+int main(void)
+{
+    int num;
+    int *ptr;
+    int **ptr2;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    ptr = &num;
+    ptr2 = &ptr;
+
+    printf("Before modification: %d\n", num);
+
+    modify_value(ptr2);
+
+    printf("After modification: %d\n", num);
+
+    return 0;
+}
