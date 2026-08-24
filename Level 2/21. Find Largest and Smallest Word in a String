@@ -1,0 +1,186 @@
+//Write a C program to find the longest and shortest word in a string.
+
+//1. Array Version
+#include <stdio.h>
+
+#define MAX_SIZE 200
+
+void find_longest_shortest(char str[])
+{
+    int i = 0;
+
+    int start;
+    int current_start;
+    int current_length;
+
+    int longest_start = 0;
+    int shortest_start = 0;
+
+    int longest_length = 0;
+    int shortest_length = MAX_SIZE;
+
+    while (str[i] != '\0')
+    {
+        /* Skip spaces */
+        while (str[i] == ' ')
+        {
+            i++;
+        }
+
+        if (str[i] == '\0')
+            break;
+
+        current_start = i;
+        current_length = 0;
+
+        /* Find current word */
+        while (str[i] != '\0' && str[i] != ' ')
+        {
+            current_length++;
+            i++;
+        }
+
+        /* Check longest */
+        if (current_length > longest_length)
+        {
+            longest_length = current_length;
+            longest_start = current_start;
+        }
+
+        /* Check shortest */
+        if (current_length < shortest_length)
+        {
+            shortest_length = current_length;
+            shortest_start = current_start;
+        }
+    }
+
+    printf("Longest word  : ");
+
+    for (i = longest_start;
+         i < longest_start + longest_length;
+         i++)
+    {
+        printf("%c", str[i]);
+    }
+
+    printf("\n");
+
+    printf("Shortest word : ");
+
+    for (i = shortest_start;
+         i < shortest_start + shortest_length;
+         i++)
+    {
+        printf("%c", str[i]);
+    }
+
+    printf("\n");
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+
+    printf("Enter a string: ");
+    scanf("%199[^\n]", str);
+
+    find_longest_shortest(str);
+
+    return 0;
+}
+
+//Pointer Version
+#include <stdio.h>
+
+#define MAX_SIZE 200
+
+void find_longest_shortest(const char *str)
+{
+    const char *ptr;
+    const char *word_start;
+
+    const char *longest_start;
+    const char *shortest_start;
+
+    int current_length;
+    int longest_length = 0;
+    int shortest_length = MAX_SIZE;
+
+    ptr = str;
+
+    longest_start = str;
+    shortest_start = str;
+
+    while (*ptr != '\0')
+    {
+        /* Skip spaces */
+        while (*ptr == ' ')
+        {
+            ptr++;
+        }
+
+        if (*ptr == '\0')
+            break;
+
+        word_start = ptr;
+        current_length = 0;
+
+        /* Find current word */
+        while (*ptr != '\0' && *ptr != ' ')
+        {
+            current_length++;
+            ptr++;
+        }
+
+        /* Check longest */
+        if (current_length > longest_length)
+        {
+            longest_length = current_length;
+            longest_start = word_start;
+        }
+
+        /* Check shortest */
+        if (current_length < shortest_length)
+        {
+            shortest_length = current_length;
+            shortest_start = word_start;
+        }
+    }
+
+    printf("Longest word  : ");
+
+    ptr = longest_start;
+
+    while (*ptr != '\0' && *ptr != ' ')
+    {
+        putchar(*ptr);
+        ptr++;
+    }
+
+    printf("\n");
+
+    printf("Shortest word : ");
+
+    ptr = shortest_start;
+
+    while (*ptr != '\0' && *ptr != ' ')
+    {
+        putchar(*ptr);
+        ptr++;
+    }
+
+    printf("\n");
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+
+    printf("Enter a string: ");
+    scanf("%199[^\n]", str);
+
+    find_longest_shortest(str);
+
+    return 0;
+}
