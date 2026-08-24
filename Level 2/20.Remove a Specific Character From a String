@@ -1,0 +1,113 @@
+//Write a C program to remove all occurrences of a given character from a string.
+
+//1. Array Version
+
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void remove_character(char str[], char key)
+{
+    int i = 0;
+    int j = 0;
+
+    while (str[i] != '\0')
+    {
+        if (str[i] != key)
+        {
+            str[j] = str[i];
+            j++;
+        }
+
+        i++;
+    }
+
+    str[j] = '\0';
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+    char key;
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    getchar();
+
+    printf("Enter character to remove: ");
+    scanf("%c", &key);
+
+    remove_character(str, key);
+
+    printf("Result: %s\n", str);
+
+    return 0;
+}
+
+//2. Pointer Version
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void remove_character(char *str, char key)
+{
+    char *read;
+    char *write;
+
+    read = str;
+    write = str;
+
+    while (*read != '\0')
+    {
+        if (*read != key)
+        {
+            *write = *read;
+            write++;
+        }
+
+        read++;
+    }
+
+    *write = '\0';
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+    char key;
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    getchar();
+
+    printf("Enter character to remove: ");
+    scanf("%c", &key);
+
+    remove_character(str, key);
+
+    printf("Result: %s\n", str);
+
+    return 0;
+}
+
+#######################################
+For example:
+
+Input:
+hello
+     ↑
+remove 'l'
+
+Processing:
+
+h → keep
+e → keep
+l → remove
+l → remove
+o → keep
+
+Result:
+
+heo
