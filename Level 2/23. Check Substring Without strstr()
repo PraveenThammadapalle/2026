@@ -1,0 +1,117 @@
+//Write a C program to check whether one string is present inside another string without using strstr().
+
+//Array Version
+#include <stdio.h>
+
+#define MAX_SIZE 200
+
+int is_substring(char str[], char sub[])
+{
+    int i;
+    int j;
+
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        j = 0;
+
+        while (sub[j] != '\0' &&
+               str[i + j] == sub[j])
+        {
+            j++;
+        }
+
+        if (sub[j] == '\0')
+        {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+    char sub[MAX_SIZE];
+
+    printf("Enter main string: ");
+    scanf("%199[^\n]", str);
+
+    getchar();
+
+    printf("Enter string to search: ");
+    scanf("%199[^\n]", sub);
+
+    if (is_substring(str, sub))
+    {
+        printf("Substring Found\n");
+    }
+    else
+    {
+        printf("Substring Not Found\n");
+    }
+
+    return 0;
+}
+
+//Pointer version
+#include <stdio.h>
+
+#define MAX_SIZE 200
+
+int is_substring(const char *str, const char *sub)
+{
+    const char *ptr;
+    const char *check;
+
+    if (*sub == '\0')
+        return 1;
+
+    while (*str != '\0')
+    {
+        ptr = str;
+        check = sub;
+
+        while (*ptr != '\0' &&
+               *check != '\0' &&
+               *ptr == *check)
+        {
+            ptr++;
+            check++;
+        }
+
+        if (*check == '\0')
+        {
+            return 1;
+        }
+
+        str++;
+    }
+
+    return 0;
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+    char sub[MAX_SIZE];
+
+    printf("Enter main string: ");
+    scanf("%199[^\n]", str);
+
+    getchar();
+
+    printf("Enter string to search: ");
+    scanf("%199[^\n]", sub);
+
+    if (is_substring(str, sub))
+    {
+        printf("Substring Found\n");
+    }
+    else
+    {
+        printf("Substring Not Found\n");
+    }
+
+    return 0;
+}
