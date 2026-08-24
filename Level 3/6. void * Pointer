@@ -1,0 +1,43 @@
+//Write a C program to demonstrate the use of a void pointer with different data types.
+
+#include <stdio.h>
+
+void print_value(void *ptr, char type)
+{
+    if (type == 'i')
+    {
+        printf("Integer = %d\n", *(int *)ptr);
+    }
+    else if (type == 'f')
+    {
+        printf("Float = %.2f\n", *(float *)ptr);
+    }
+    else if (type == 'c')
+    {
+        printf("Character = %c\n", *(char *)ptr);
+    }
+}
+
+int main(void)
+{
+    int num;
+    float value;
+    char ch;
+
+    printf("Enter an integer: ");
+    scanf("%d", &num);
+
+    printf("Enter a float: ");
+    scanf("%f", &value);
+
+    getchar();
+
+    printf("Enter a character: ");
+    scanf("%c", &ch);
+
+    print_value(&num, 'i');
+    print_value(&value, 'f');
+    print_value(&ch, 'c');
+
+    return 0;
+}
