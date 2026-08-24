@@ -1,0 +1,149 @@
+//Write a C program to find the longest word in a string using a function.
+//Array Version
+
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void find_longest_word(char str[])
+{
+    int i = 0;
+    int start = 0;
+    int current_start = 0;
+    int current_length = 0;
+    int max_length = 0;
+    int max_start = 0;
+
+    while (str[i] != '\0')
+    {
+        if (str[i] != ' ')
+        {
+            if (current_length == 0)
+            {
+                current_start = i;
+            }
+
+            current_length++;
+        }
+        else
+        {
+            if (current_length > max_length)
+            {
+                max_length = current_length;
+                max_start = current_start;
+            }
+
+            current_length = 0;
+        }
+
+        i++;
+    }
+
+    /* Check last word */
+    if (current_length > max_length)
+    {
+        max_length = current_length;
+        max_start = current_start;
+    }
+
+    printf("Longest word: ");
+
+    for (i = max_start;
+         i < max_start + max_length;
+         i++)
+    {
+        printf("%c", str[i]);
+    }
+
+    printf("\n");
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    find_longest_word(str);
+
+    return 0;
+}
+
+##############################################################################
+//Pointer version
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void find_longest_word(const char *str)
+{
+    const char *ptr;
+    const char *word_start;
+    const char *longest_start;
+
+    int current_length = 0;
+    int max_length = 0;
+
+    ptr = str;
+    word_start = str;
+    longest_start = str;
+
+    while (*ptr != '\0')
+    {
+        if (*ptr != ' ')
+        {
+            current_length++;
+        }
+        else
+        {
+            if (current_length > max_length)
+            {
+                max_length = current_length;
+                longest_start = word_start;
+            }
+
+            current_length = 0;
+            word_start = ptr + 1;
+        }
+
+        ptr++;
+    }
+
+    /* Check last word */
+    if (current_length > max_length)
+    {
+        max_length = current_length;
+        longest_start = word_start;
+    }
+
+    printf("Longest word: ");
+
+    ptr = longest_start;
+
+    while (*ptr != '\0' && *ptr != ' ')
+    {
+        putchar(*ptr);
+        ptr++;
+    }
+
+    printf("\n");
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+
+    printf("Enter a string: ");
+    scanf("%99[^\n]", str);
+
+    find_longest_word(str);
+
+    return 0;
+}
+
+
+output:
+Enter a string: Embedded C Programming
+
+Longest word: Programming
