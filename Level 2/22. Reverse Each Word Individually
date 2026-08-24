@@ -1,0 +1,114 @@
+// Write a C program to reverse every word individually while keeping the word order unchanged.
+
+//Array Version
+#include <stdio.h>
+
+#define MAX_SIZE 200
+
+void reverse_word(char str[], int start, int end)
+{
+    char temp;
+
+    while (start < end)
+    {
+        temp = str[start];
+        str[start] = str[end];
+        str[end] = temp;
+
+        start++;
+        end--;
+    }
+}
+
+void reverse_each_word(char str[])
+{
+    int i = 0;
+    int start = 0;
+
+    while (str[i] != '\0')
+    {
+        if (str[i] == ' ')
+        {
+            reverse_word(str, start, i - 1);
+
+            start = i + 1;
+        }
+
+        i++;
+    }
+
+    /* Reverse last word */
+    reverse_word(str, start, i - 1);
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+
+    printf("Enter a string: ");
+    scanf("%199[^\n]", str);
+
+    reverse_each_word(str);
+
+    printf("Result: %s\n", str);
+
+    return 0;
+}
+
+//2. Pointer Version
+#include <stdio.h>
+
+#define MAX_SIZE 200
+
+void reverse_word(char *start, char *end)
+{
+    char temp;
+
+    while (start < end)
+    {
+        temp = *start;
+        *start = *end;
+        *end = temp;
+
+        start++;
+        end--;
+    }
+}
+
+void reverse_each_word(char *str)
+{
+    char *start;
+    char *ptr;
+
+    start = str;
+    ptr = str;
+
+    while (*ptr != '\0')
+    {
+        if (*ptr == ' ')
+        {
+            reverse_word(start, ptr - 1);
+
+            start = ptr + 1;
+        }
+
+        ptr++;
+    }
+
+    /* Reverse last word */
+    reverse_word(start, ptr - 1);
+}
+
+int main(void)
+{
+    char str[MAX_SIZE];
+
+    printf("Enter a string: ");
+    scanf("%199[^\n]", str);
+
+    reverse_each_word(str);
+
+    printf("Result: %s\n", str);
+
+    return 0;
+}
