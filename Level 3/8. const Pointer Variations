@@ -1,0 +1,42 @@
+//Write a C program to demonstrate the different types of const pointers in C.
+
+#include <stdio.h>
+
+int main(void)
+{
+    int a = 10;
+    int b = 20;
+
+    /* 1. Pointer to constant data */
+    const int *ptr1;
+
+    ptr1 = &a;
+
+    printf("Pointer to const: %d\n", *ptr1);
+
+    ptr1 = &b;          /* Allowed */
+    printf("Pointer to const: %d\n", *ptr1);
+
+    /* *ptr1 = 30; */  /* Not allowed */
+
+
+    /* 2. Constant pointer */
+    int *const ptr2 = &a;
+
+    *ptr2 = 30;         /* Allowed */
+
+    printf("Const pointer: %d\n", *ptr2);
+
+    /* ptr2 = &b; */    /* Not allowed */
+
+
+    /* 3. Constant pointer to constant data */
+    const int *const ptr3 = &a;
+
+    printf("Const pointer to const: %d\n", *ptr3);
+
+    /* *ptr3 = 40; */  /* Not allowed */
+    /* ptr3 = &b; */   /* Not allowed */
+
+    return 0;
+}
