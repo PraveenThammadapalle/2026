@@ -1,0 +1,49 @@
+//Write a C program to demonstrate how to safely check and use a pointer, and show examples of NULL, dangling, and wild pointers.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    int *ptr1 = NULL;
+    int *ptr2;
+    int *ptr3;
+
+    /* NULL pointer */
+    if (ptr1 == NULL)
+    {
+        printf("ptr1 is a NULL pointer\n");
+    }
+
+    /* Wild pointer - uninitialized pointer */
+    ptr2 = NULL;
+
+    if (ptr2 == NULL)
+    {
+        printf("ptr2 is not initialized\n");
+    }
+
+    /* Dangling pointer demonstration */
+    ptr3 = (int *)malloc(sizeof(int));
+
+    if (ptr3 == NULL)
+    {
+        printf("Memory allocation failed\n");
+        return 1;
+    }
+
+    *ptr3 = 100;
+
+    printf("Value = %d\n", *ptr3);
+
+    free(ptr3);
+
+    ptr3 = NULL;
+
+    if (ptr3 == NULL)
+    {
+        printf("ptr3 is safely NULL after free\n");
+    }
+
+    return 0;
+}
