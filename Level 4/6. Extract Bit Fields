@@ -1,0 +1,44 @@
+//Write a C program to extract a specific number of consecutive bits from an unsigned integer, 
+//starting from a given bit position.
+
+#include <stdio.h>
+
+unsigned int extract_bits(unsigned int value, int start_bit, int length)
+{
+    unsigned int mask;
+
+    mask = (1U << length) - 1U;
+
+    return (value >> start_bit) & mask;
+}
+
+int main(void)
+{
+    unsigned int value;
+    unsigned int result;
+    int start_bit;
+    int length;
+
+    printf("Enter value: ");
+    scanf("%u", &value);
+
+    printf("Enter starting bit position: ");
+    scanf("%d", &start_bit);
+
+    printf("Enter number of bits: ");
+    scanf("%d", &length);
+
+    if (start_bit < 0 || start_bit > 31 ||
+        length <= 0 || length > 32 ||
+        start_bit + length > 32)
+    {
+        printf("Invalid bit range\n");
+        return 1;
+    }
+
+    result = extract_bits(value, start_bit, length);
+
+    printf("Extracted value = %u\n", result);
+
+    return 0;
+}
