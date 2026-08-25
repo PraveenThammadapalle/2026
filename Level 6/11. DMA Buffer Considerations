@@ -1,0 +1,44 @@
+//Write a C program to demonstrate a buffer used for DMA transfer and show how volatile can be used when the buffer is accessed by hardware.
+
+#include <stdio.h>
+
+#define BUFFER_SIZE 8
+
+volatile unsigned char dma_buffer[BUFFER_SIZE];
+
+void dma_receive(void)
+{
+    int i;
+
+    for (i = 0; i < BUFFER_SIZE; i++)
+    {
+        dma_buffer[i] = i + 1;
+    }
+}
+
+void process_buffer(void)
+{
+    int i;
+
+    for (i = 0; i < BUFFER_SIZE; i++)
+    {
+        printf("%d ", dma_buffer[i]);
+    }
+
+    printf("\n");
+}
+
+int main(void)
+{
+    printf("Starting DMA transfer...\n");
+
+    dma_receive();
+
+    printf("DMA transfer completed\n");
+
+    printf("Buffer data: ");
+
+    process_buffer();
+
+    return 0;
+}
