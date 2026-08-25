@@ -1,0 +1,18 @@
+//Write a C program to demonstrate how a hardware register can be accessed using a volatile pointer.
+
+#include <stdio.h>
+
+#define REGISTER_ADDRESS 0x40000000U
+
+int main(void)
+{
+    volatile unsigned int *register_address;
+
+    register_address = (volatile unsigned int *)REGISTER_ADDRESS;
+
+    *register_address = 0x00000001U;
+
+    printf("Register value written successfully\n");
+
+    return 0;
+}
