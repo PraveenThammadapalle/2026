@@ -1,0 +1,117 @@
+//Write a C program to create a circular singly linked list and display all elements.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node
+{
+    int data;
+    struct Node *next;
+};
+
+struct Node *insert_end(struct Node *head, int data)
+{
+    struct Node *new_node;
+    struct Node *temp;
+
+    new_node = malloc(sizeof(struct Node));
+
+    if (new_node == NULL)
+        return head;
+
+    new_node->data = data;
+
+    if (head == NULL)
+    {
+        new_node->next = new_node;
+        return new_node;
+    }
+
+    temp = head;
+
+    while (temp->next != head)
+    {
+        temp = temp->next;
+    }
+
+    temp->next = new_node;
+    new_node->next = head;
+
+    return head;
+}
+
+void display(struct Node *head)
+{
+    struct Node *temp;
+
+    if (head == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
+
+    temp = head;
+
+    do
+    {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    while (temp != head);
+
+    printf("\n");
+}
+
+void free_list(struct Node *head)
+{
+    struct Node *temp;
+    struct Node *next;
+
+    if (head == NULL)
+        return;
+
+    temp = head->next;
+
+    while (temp != head)
+    {
+        next = temp->next;
+        free(temp);
+        temp = next;
+    }
+
+    free(head);
+}
+
+int main(void)
+{
+    struct Node *head = NULL;
+
+    int n;
+    int i;
+    int data;
+
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
+
+    if (n <= 0)
+    {
+        printf("Invalid number of nodes\n");
+        return 1;
+    }
+
+    for (i = 0; i < n; i++)
+    {
+        printf("Enter data: ");
+        scanf("%d", &data);
+
+        head = insert_end(head, data);
+    }
+
+    printf("Circular Linked List: ");
+
+    display(head);
+
+    free_list(head);
+
+    return 0;
+}
