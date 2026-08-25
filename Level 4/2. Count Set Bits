@@ -1,0 +1,31 @@
+//Write a C program to count the number of set bits (1s) in an unsigned integer using bitwise operators. Take the number from the user.
+
+#include <stdio.h>
+
+int count_set_bits(unsigned int value)
+{
+    int count = 0;
+
+    while (value != 0)
+    {
+        count = count + (value & 1U);
+        value = value >> 1;
+    }
+
+    return count;
+}
+
+int main(void)
+{
+    unsigned int value;
+    int result;
+
+    printf("Enter a number: ");
+    scanf("%u", &value);
+
+    result = count_set_bits(value);
+
+    printf("Number of set bits = %d\n", result);
+
+    return 0;
+}
