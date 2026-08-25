@@ -1,0 +1,23 @@
+//Write a C program to demonstrate structure padding and display the size of a structure and its individual members.
+
+#include <stdio.h>
+
+struct Data
+{
+    char a;
+    int b;
+    char c;
+};
+
+int main(void)
+{
+    struct Data data;
+
+    printf("Size of char a = %zu\n", sizeof(data.a));
+    printf("Size of int b  = %zu\n", sizeof(data.b));
+    printf("Size of char c = %zu\n", sizeof(data.c));
+
+    printf("Size of structure = %zu\n", sizeof(data));
+
+    return 0;
+}
