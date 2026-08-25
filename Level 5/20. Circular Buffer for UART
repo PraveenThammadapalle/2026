@@ -1,0 +1,105 @@
+//Write a C program to implement a circular buffer (ring buffer) for storing and reading UART data. 
+//Implement put, get, and display operations.
+
+#include <stdio.h>
+
+#define BUFFER_SIZE 10
+
+typedef struct
+{
+    unsigned char buffer[BUFFER_SIZE];
+    int head;
+    int tail;
+} CircularBuffer;
+
+void buffer_init(CircularBuffer *cb)
+{
+    cb->head = 0;
+    cb->tail = 0;
+}
+
+int buffer_is_empty(CircularBuffer *cb)
+{
+    return cb->head == cb->tail;
+}
+
+int buffer_is_full(CircularBuffer *cb)
+{
+    return ((cb->head + 1) % BUFFER_SIZE) == cb->tail;
+}
+
+int buffer_put(CircularBuffer *cb, unsigned char data)
+{
+    if (buffer_is_full(cb))
+    {
+        return 0;
+    }
+
+    cb->buffer[cb->head] = data;
+    cb->head = (cb->head + 1) % BUFFER_SIZE;
+
+    return 1;
+}
+
+int buffer_get(CircularBuffer *cb, unsigned char *data)
+{
+    if (buffer_is_empty(cb))
+    {
+        return 0;
+    }
+
+    *data = cb->buffer[cb->tail];
+    cb->tail = (cb->tail + 1) % BUFFER_SIZE;
+
+    return 1;
+}
+
+int main(void)
+{
+    CircularBuffer cb;
+
+    unsigned char data;
+    int choice;
+
+    buffer_init(&cb);
+
+    while (1)
+    {
+        printf("\n1. Put Data\n");
+        printf("2. Get Data\n");
+        printf("3. Exit\n");
+
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+            case 1:
+                printf("Enter character: ");
+                scanf(" %c", &data);
+
+                if (buffer_put(&cb, data))
+                    printf("Data inserted\n");
+                else
+                    printf("Buffer Full\n");
+
+                break;
+
+            case 2:
+                if (buffer_get(&cb, &data))
+                    printf("Received data: %c\n", data);
+                else
+                    printf("Buffer Empty\n");
+
+                break;
+
+            case 3:
+                return 0;
+
+            default:
+                printf("Invalid choice\n");
+        }
+    }
+
+    return 0;
+}
