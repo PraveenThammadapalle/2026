@@ -29,3 +29,34 @@ int main(void)
 
     return 0;
 }
+
+#########################################################
+//Can you count set bits without checking every bit?
+
+#include <stdio.h>
+
+int count_set_bits(unsigned int value)
+{
+    int count = 0;
+
+    while (value != 0)
+    {
+        value = value & (value - 1);
+        count++;
+    }
+
+    return count;
+}
+
+int main(void)
+{
+    unsigned int value;
+
+    printf("Enter a number: ");
+    scanf("%u", &value);
+
+    printf("Number of set bits = %d\n",
+           count_set_bits(value));
+
+    return 0;
+}
