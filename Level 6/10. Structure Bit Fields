@@ -1,0 +1,25 @@
+//Write a C program to demonstrate bit fields in a structure. Create fields for a flag, mode, and status using minimum required bits.
+
+#include <stdio.h>
+
+struct Status
+{
+    unsigned int flag   : 1;
+    unsigned int mode   : 3;
+    unsigned int status : 4;
+};
+
+int main(void)
+{
+    struct Status data;
+
+    data.flag = 1;
+    data.mode = 5;
+    data.status = 10;
+
+    printf("Flag   = %u\n", data.flag);
+    printf("Mode   = %u\n", data.mode);
+    printf("Status = %u\n", data.status);
+
+    return 0;
+}
