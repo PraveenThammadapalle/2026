@@ -1,0 +1,67 @@
+//Write a C program to demonstrate a simple watchdog timer concept. 
+//The watchdog should reset if it is not serviced within the timeout period.
+
+#include <stdio.h>
+
+#define WATCHDOG_TIMEOUT 5
+
+typedef struct
+{
+    int counter;
+    int timeout;
+} Watchdog;
+
+void watchdog_init(Watchdog *wd, int timeout)
+{
+    wd->counter = 0;
+    wd->timeout = timeout;
+}
+
+void watchdog_kick(Watchdog *wd)
+{
+    wd->counter = 0;
+    printf("Watchdog serviced\n");
+}
+
+int watchdog_update(Watchdog *wd)
+{
+    wd->counter++;
+
+    if (wd->counter >= wd->timeout)
+    {
+        return 1;
+    }
+
+    return 0;
+}
+
+int main(void)
+{
+    Watchdog wd;
+    int i;
+    int service;
+
+    watchdog_init(&wd, WATCHDOG_TIMEOUT);
+
+    for (i = 1; i <= 15; i++)
+    {
+        printf("System running: %d\n", i);
+
+        printf("Service watchdog? (1 = Yes, 0 = No): ");
+        scanf("%d", &service);
+
+        if (service == 1)
+        {
+            watchdog_kick(&wd);
+        }
+
+        if (watchdog_update(&wd))
+        {
+            printf("Watchdog timeout! System reset\n");
+
+            watchdog_init(&wd, WATCHDOG_TIMEOUT);
+        }
+    }
+
+    return 0;
+}
