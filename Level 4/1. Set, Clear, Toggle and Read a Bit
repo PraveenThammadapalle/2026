@@ -1,0 +1,80 @@
+//
+//Write a C program to set, clear, toggle, and read a specific bit of an integer using bitwise operators. Take the value and bit position from the user.
+
+
+#include <stdio.h>
+
+void set_bit(unsigned int *value, int bit)
+{
+    *value = *value | (1U << bit);
+}
+
+void clear_bit(unsigned int *value, int bit)
+{
+    *value = *value & ~(1U << bit);
+}
+
+void toggle_bit(unsigned int *value, int bit)
+{
+    *value = *value ^ (1U << bit);
+}
+
+int read_bit(unsigned int value, int bit)
+{
+    return (value >> bit) & 1U;
+}
+
+int main(void)
+{
+    unsigned int value;
+    int bit;
+    int choice;
+
+    printf("Enter value: ");
+    scanf("%u", &value);
+
+    printf("Enter bit position: ");
+    scanf("%d", &bit);
+
+    if (bit < 0 || bit > 31)
+    {
+        printf("Invalid bit position\n");
+        return 1;
+    }
+
+    printf("\n1. Set Bit\n");
+    printf("2. Clear Bit\n");
+    printf("3. Toggle Bit\n");
+    printf("4. Read Bit\n");
+
+    printf("Enter choice: ");
+    scanf("%d", &choice);
+
+    switch (choice)
+    {
+        case 1:
+            set_bit(&value, bit);
+            printf("Value after setting bit = %u\n", value);
+            break;
+
+        case 2:
+            clear_bit(&value, bit);
+            printf("Value after clearing bit = %u\n", value);
+            break;
+
+        case 3:
+            toggle_bit(&value, bit);
+            printf("Value after toggling bit = %u\n", value);
+            break;
+
+        case 4:
+            printf("Bit value = %d\n", read_bit(value, bit));
+            break;
+
+        default:
+            printf("Invalid choice\n");
+            break;
+    }
+
+    return 0;
+}
