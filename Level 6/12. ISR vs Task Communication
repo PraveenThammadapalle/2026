@@ -1,4 +1,4 @@
-//Write a C program to demonstrate communication between an ISR and a task using a volatile flag.
+//Write a C program to demonstrate communication between an ISR and a task using a volatile flag..
 
 #include <stdio.h>
 
