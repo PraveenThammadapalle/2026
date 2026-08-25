@@ -1,0 +1,59 @@
+//Write a C program to implement a simple UART receive buffer using a circular buffer and volatile read/write indexes.
+
+#include <stdio.h>
+
+#define BUFFER_SIZE 10
+
+volatile unsigned char rx_buffer[BUFFER_SIZE];
+
+volatile int rx_write_index = 0;
+volatile int rx_read_index = 0;
+
+void uart_rx_isr(unsigned char data)
+{
+    int next_index;
+
+    next_index = (rx_write_index + 1) % BUFFER_SIZE;
+
+    if (next_index != rx_read_index)
+    {
+        rx_buffer[rx_write_index] = data;
+        rx_write_index = next_index;
+    }
+}
+
+int uart_read(unsigned char *data)
+{
+    if (rx_read_index == rx_write_index)
+    {
+        return 0;
+    }
+
+    *data = rx_buffer[rx_read_index];
+
+    rx_read_index = (rx_read_index + 1) % BUFFER_SIZE;
+
+    return 1;
+}
+
+int main(void)
+{
+    unsigned char data;
+
+    uart_rx_isr('H');
+    uart_rx_isr('E');
+    uart_rx_isr('L');
+    uart_rx_isr('L');
+    uart_rx_isr('O');
+
+    printf("Received data: ");
+
+    while (uart_read(&data))
+    {
+        printf("%c", data);
+    }
+
+    printf("\n");
+
+    return 0;
+}
