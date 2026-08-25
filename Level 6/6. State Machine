@@ -1,0 +1,98 @@
+//Write a C program to implement a simple finite state machine (FSM) using an enum and switch-case. 
+//The system should have OFF, ON, and ERROR states.
+
+#include <stdio.h>
+
+typedef enum
+{
+    STATE_OFF,
+    STATE_ON,
+    STATE_ERROR
+} State;
+
+void run_state_machine(State *state, int event)
+{
+    switch (*state)
+    {
+        case STATE_OFF:
+
+            if (event == 1)
+            {
+                *state = STATE_ON;
+                printf("OFF -> ON\n");
+            }
+
+            break;
+
+        case STATE_ON:
+
+            if (event == 2)
+            {
+                *state = STATE_OFF;
+                printf("ON -> OFF\n");
+            }
+            else if (event == 3)
+            {
+                *state = STATE_ERROR;
+                printf("ON -> ERROR\n");
+            }
+
+            break;
+
+        case STATE_ERROR:
+
+            if (event == 4)
+            {
+                *state = STATE_OFF;
+                printf("ERROR -> OFF\n");
+            }
+
+            break;
+
+        default:
+            *state = STATE_ERROR;
+            break;
+    }
+}
+
+int main(void)
+{
+    State state = STATE_OFF;
+    int event;
+
+    while (1)
+    {
+        printf("\nCurrent State: ");
+
+        switch (state)
+        {
+            case STATE_OFF:
+                printf("OFF\n");
+                break;
+
+            case STATE_ON:
+                printf("ON\n");
+                break;
+
+            case STATE_ERROR:
+                printf("ERROR\n");
+                break;
+        }
+
+        printf("\n1. Turn ON\n");
+        printf("2. Turn OFF\n");
+        printf("3. Generate ERROR\n");
+        printf("4. Clear ERROR\n");
+        printf("5. Exit\n");
+
+        printf("Enter event: ");
+        scanf("%d", &event);
+
+        if (event == 5)
+            break;
+
+        run_state_machine(&state, event);
+    }
+
+    return 0;
+}
