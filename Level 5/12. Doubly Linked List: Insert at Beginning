@@ -1,0 +1,90 @@
+//Write a C program to insert a new node at the beginning of a doubly linked list.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node
+{
+    int data;
+    struct Node *prev;
+    struct Node *next;
+};
+
+struct Node *insert_beginning(struct Node *head, int data)
+{
+    struct Node *new_node;
+
+    new_node = malloc(sizeof(struct Node));
+
+    if (new_node == NULL)
+        return head;
+
+    new_node->data = data;
+    new_node->prev = NULL;
+    new_node->next = head;
+
+    if (head != NULL)
+        head->prev = new_node;
+
+    head = new_node;
+
+    return head;
+}
+
+void display(struct Node *head)
+{
+    while (head != NULL)
+    {
+        printf("%d ", head->data);
+        head = head->next;
+    }
+
+    printf("\n");
+}
+
+void free_list(struct Node *head)
+{
+    struct Node *temp;
+
+    while (head != NULL)
+    {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+int main(void)
+{
+    struct Node *head = NULL;
+
+    int n;
+    int i;
+    int data;
+
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++)
+    {
+        printf("Enter data: ");
+        scanf("%d", &data);
+
+        head = insert_beginning(head, data);
+    }
+
+    printf("Doubly Linked List: ");
+    display(head);
+
+    printf("Enter data to insert at beginning: ");
+    scanf("%d", &data);
+
+    head = insert_beginning(head, data);
+
+    printf("After insertion: ");
+    display(head);
+
+    free_list(head);
+
+    return 0;
+}
