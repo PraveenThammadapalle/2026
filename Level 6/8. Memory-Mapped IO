@@ -1,0 +1,16 @@
+//Write a C program to demonstrate memory-mapped I/O by accessing a hardware register through a pointer.
+
+#include <stdio.h>
+
+int main(void)
+{
+    volatile unsigned int *gpio_register;
+
+    gpio_register = (volatile unsigned int *)0x40000000U;
+
+    *gpio_register = 0x01U;
+
+    printf("GPIO register written\n");
+
+    return 0;
+}
