@@ -1,0 +1,24 @@
+//Write a C program to demonstrate the use of the volatile keyword for a variable that can be modified outside the normal program flow.
+
+#include <stdio.h>
+
+volatile int flag = 0;
+
+void set_flag(void)
+{
+    flag = 1;
+}
+
+int main(void)
+{
+    printf("Initial flag = %d\n", flag);
+
+    set_flag();
+
+    if (flag == 1)
+    {
+        printf("Flag is set\n");
+    }
+
+    return 0;
+}
