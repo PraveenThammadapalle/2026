@@ -1,0 +1,84 @@
+// Write a C program to implement a simple static memory pool without using malloc() or free(). 
+//Implement allocation and release functions.
+
+#include <stdio.h>
+
+#define BLOCK_SIZE 16
+#define BLOCK_COUNT 4
+
+static unsigned char memory_pool[BLOCK_SIZE * BLOCK_COUNT];
+static int block_used[BLOCK_COUNT];
+
+void memory_pool_init(void)
+{
+    int i;
+
+    for (i = 0; i < BLOCK_COUNT; i++)
+    {
+        block_used[i] = 0;
+    }
+}
+
+void *pool_alloc(void)
+{
+    int i;
+
+    for (i = 0; i < BLOCK_COUNT; i++)
+    {
+        if (block_used[i] == 0)
+        {
+            block_used[i] = 1;
+
+            return &memory_pool[i * BLOCK_SIZE];
+        }
+    }
+
+    return NULL;
+}
+
+void pool_free(void *ptr)
+{
+    int i;
+
+    for (i = 0; i < BLOCK_COUNT; i++)
+    {
+        if (ptr == &memory_pool[i * BLOCK_SIZE])
+        {
+            block_used[i] = 0;
+            return;
+        }
+    }
+}
+
+int main(void)
+{
+    void *ptr1;
+    void *ptr2;
+    void *ptr3;
+
+    memory_pool_init();
+
+    ptr1 = pool_alloc();
+    ptr2 = pool_alloc();
+    ptr3 = pool_alloc();
+
+    if (ptr1 != NULL)
+        printf("Block 1 allocated\n");
+
+    if (ptr2 != NULL)
+        printf("Block 2 allocated\n");
+
+    if (ptr3 != NULL)
+        printf("Block 3 allocated\n");
+
+    pool_free(ptr2);
+
+    printf("Block 2 released\n");
+
+    ptr2 = pool_alloc();
+
+    if (ptr2 != NULL)
+        printf("Block 2 allocated again\n");
+
+    return 0;
+}
