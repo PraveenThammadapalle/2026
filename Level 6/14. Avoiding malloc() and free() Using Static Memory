@@ -1,0 +1,79 @@
+//Write a C program to manage multiple data objects using a static array instead of malloc() and free().
+
+#include <stdio.h>
+
+#define MAX_OBJECTS 5
+
+struct Device
+{
+    int id;
+    int value;
+};
+
+static struct Device devices[MAX_OBJECTS];
+static int used[MAX_OBJECTS];
+
+int create_device(int id, int value)
+{
+    int i;
+
+    for (i = 0; i < MAX_OBJECTS; i++)
+    {
+        if (used[i] == 0)
+        {
+            devices[i].id = id;
+            devices[i].value = value;
+
+            used[i] = 1;
+
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+void delete_device(int index)
+{
+    if (index >= 0 && index < MAX_OBJECTS)
+    {
+        used[index] = 0;
+    }
+}
+
+void display_devices(void)
+{
+    int i;
+
+    for (i = 0; i < MAX_OBJECTS; i++)
+    {
+        if (used[i] == 1)
+        {
+            printf("Index = %d, ID = %d, Value = %d\n",
+                   i,
+                   devices[i].id,
+                   devices[i].value);
+        }
+    }
+}
+
+int main(void)
+{
+    int index1;
+    int index2;
+
+    index1 = create_device(101, 1000);
+    index2 = create_device(102, 2000);
+
+    printf("Devices:\n");
+
+    display_devices();
+
+    delete_device(index1);
+
+    printf("\nAfter deleting device 101:\n");
+
+    display_devices();
+
+    return 0;
+}
